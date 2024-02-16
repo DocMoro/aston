@@ -1,6 +1,6 @@
 function getLength(type) {
-  if (type && type.length | type.size) {
-      console.log(type.length | type.size)
+  if (type && type.length) {
+      console.log(type.length)
   } else {
       console.log(0)
   }
