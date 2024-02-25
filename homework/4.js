@@ -24,3 +24,13 @@ function myBind(func, context) {
       return func.apply(context, arg)
   }
 }
+
+function myBind(func, context, ...bindArg) {
+  return function(...arg) {
+      const uniqId = Date.now().toString();
+      context[uniqId] = func;
+      const result = context[uniqId](...bindArg, ...arg);
+      delete context[uniqId]
+      return result
+  }
+}
