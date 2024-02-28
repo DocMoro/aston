@@ -5,6 +5,43 @@
   Виды сортировок n*log(n): Быстрая(при неудачном выборе опорного эллемента Big O увеличивается до n^2), слиянием.
 */
 
+//2
+let Person = {
+  name: 'Иван'
+};
+Person = Object.create(null, { name: { value: 'Иван' } });
+let AnotherPerson = {
+  name: 'Николай',
+  __proto__: Person
+};
+//Вместо __proto__ можем использовать Object.setPrototypeOf(AnotherPerson, Person) или создать объект через Object.create(Person)
+Person.logInfo = function() {
+  console.log(`Меня зовут ${this.name}`)
+};
+
+//3.
+class SuperPerson {
+  constructor(...arg) {
+    arg.forEach(value => {
+        this[value] = value;
+    })
+  }
+
+  set name(value) {
+    this.name = value;
+  }
+
+  get name() {
+    return this.name;
+  }
+}
+
+class HyperPerson extends SuperPerson {
+  constructor(...arg) {
+    super(...arg)
+  }
+}
+
 //Продвинутый
 //1.
 function firstSum(arr, total) {
