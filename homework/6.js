@@ -73,3 +73,43 @@ setTimeout(function () {
 Promise.resolve().then(() => console.log("3")); //3
 console.log("4"); //2
 // В консоле 1, 4, 3, 2
+
+//Продвинутый
+/*
+Сначала я написал такой вариант, но потом подумал, что забить очередь макрозадач может быть плохой идеей.
+В таком случае пока функция не закончит работу, новые макрозадачи будут ждать, что может привести к зависанию всего приложения.
+Кроме того таким образом можно переполнить очередь.(Я в этих утверждениях не уверен, хочется получить комментарий на счёт данной реализации)
+function displayIndexesWithDelay(arr) {
+  for (let i = 0; i < arr.length; i++) {
+      setTimeout(() => {
+          console.log(i)
+      }, i * 3000)
+  }
+}
+*/
+
+function setDelay(ms) {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          resolve()
+      }, ms)
+  });
+}
+
+function displayIndexesWithDelay(arr) {
+  if (arr.length < 1) {
+      return
+  }
+  let i = 0;
+  function displayIndexes() {
+      console.log(i);
+      i++;
+      setDelay(3000)
+          .then(() => {
+              if (i < arr.length ) {
+                  displayIndexes()
+              }
+          });
+  }
+  displayIndexes()
+}
