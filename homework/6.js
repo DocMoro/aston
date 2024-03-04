@@ -102,10 +102,10 @@ function displayIndexesWithDelay(arr) {
   }
   let i = 0;
   function displayIndexes() {
-      console.log(i);
-      i++;
       setDelay(3000)
           .then(() => {
+              console.log(i);
+              i++;
               if (i < arr.length ) {
                   displayIndexes()
               }
