@@ -14,3 +14,45 @@ function pattern(n) {
     }
     cash.reverse().forEach(s => console.log(s))
 }
+
+//Продвинутый
+//1
+class PaginationUtil {
+    constructor(arr, size) {
+        this.size = size > 1 ? size : 1;
+        this.pages = [];
+        for (let i = 0; i < Math.ceil(arr.length / this.size); i++) {
+            this.pages[i] = arr.slice((i * this.size), (i * this.size) + this.size);
+        }
+    }
+
+    pageCount() {
+        return this.pages.length
+    }
+
+    itemCount() {
+        const len = this.pages.length;
+        if (len === 0) {
+            return 0
+        }
+        let count = (len - 1) * this.size;
+        count = count + this.pages[len - 1].length;
+        return count
+    }
+
+    pageItemCount(iPage) {
+        const page = this.pages[iPage];
+        if (!page) {
+            return -1
+        }
+        return page.length
+    }
+
+    pageIndex(iEl) {
+        const iPage = Math.floor(iEl / this.size);
+        if (!this.pages[iPage]) {
+            return -1
+        }
+        return iPage
+    }
+}
